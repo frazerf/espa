@@ -20,7 +20,7 @@ export default async (req) => {
     },
     body: JSON.stringify({
       from: 'noreply@espa.co.nz',
-      to: 'you@yourworkdomain.com', // swap for your actual work email
+      to: 'evan.gwilliam@espa.co.nz', // swap for your actual work email
       reply_to: email, // lets you hit reply in outlook and it goes straight back to them
       subject: `New enquiry from ${name}`,
       html: `

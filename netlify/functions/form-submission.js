@@ -1,11 +1,11 @@
 // netlify/functions/form-submission.js
 export default async (req) => {
-  const body = await req.text();
-  const params = new URLSearchParams(body);
+  const body = await req.json();
 
-  const name = params.get('name');
-  const email = params.get('email');
-  const message = params.get('message');
+  // Netlify sends form fields nested inside a data object
+  const name = body.data?.name;
+  const email = body.data?.email;
+  const message = body.data?.message;
 
   // Bail out early if any required fields are missing
   if (!name || !email || !message) {
@@ -20,7 +20,7 @@ export default async (req) => {
     },
     body: JSON.stringify({
       from: 'noreply@espa.co.nz',
-      to: 'evan.gwilliam@espa.co.nz', // swap for your actual work email
+      to: 'evan.gwilliam@espa.co.nz',
       reply_to: email, // lets you hit reply in outlook and it goes straight back to them
       subject: `New enquiry from ${name}`,
       html: `

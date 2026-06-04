@@ -54,6 +54,30 @@ dots.forEach((dot, i) => {
 
 startAutoplay();
 
+// ─── Director modal ───────────────────────────────────────────────────────────
+const directorModal   = document.getElementById('directorModal');
+const openDirectorBtn = document.getElementById('openDirectorModal');
+const closeDirectorBtn = document.getElementById('closeDirectorModal');
+const directorOverlay = document.getElementById('directorModalOverlay');
+
+const openModal = () => {
+  directorModal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+};
+
+const closeModal = () => {
+  directorModal.classList.remove('is-open');
+  document.body.style.overflow = '';
+};
+
+openDirectorBtn.addEventListener('click', openModal);
+closeDirectorBtn.addEventListener('click', closeModal);
+directorOverlay.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && directorModal.classList.contains('is-open')) closeModal();
+});
+
 // ─── What We Do tabs ─────────────────────────────────────────────────────────
 const tabs     = document.querySelectorAll('.what-we-do__tab');
 const contents = document.querySelectorAll('.what-we-do__content');
